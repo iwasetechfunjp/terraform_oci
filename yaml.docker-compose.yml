@@ -1,0 +1,20 @@
+version: '3'
+services:
+  tf_oci:
+    restart: always
+    build:
+      context: ./container
+      args:
+        - GIT_GLOBAL_EMAIL
+        - GIT_GLOBAL_NAME
+        - TF_VAR_tenancy_ocid
+        - TF_VAR_compartment_ocid
+        - TF_VAR_user_ocid
+        - TF_VAR_fingerprint
+        - TF_VAR_private_key_path
+    stdin_open: true
+    container_name: tf_oci
+    working_dir: '/opt/src/'
+    tty: true
+    volumes:
+      - ./container/src:/opt/src
